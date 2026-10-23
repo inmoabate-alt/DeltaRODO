@@ -19,7 +19,7 @@ setText('property-price', property.price.replace(/^USD\s*/, ''));
 setText('description', property.description);
 const validPhone = /^\d{8,15}$/.test(property.whatsapp);
 if (validPhone) {
-  const message = `Hola, me interesa el apartamento de 2 dormitorios en Delta Rodó, Cordón, publicado a ${property.price} (ref. ${property.reference}). Quisiera confirmar disponibilidad, fecha de entrega y coordinar una visita.`;
+  const message = 'Quiero coordinar visita a Delta Rodo';
   document.querySelectorAll('.whatsapp').forEach(link => {
     link.href = `https://wa.me/${property.whatsapp}?text=${encodeURIComponent(message)}`;
     link.target = '_blank';
