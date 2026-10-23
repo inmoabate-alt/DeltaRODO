@@ -23,3 +23,7 @@ Píxel 1905629136345100. Se registra PageView y un evento personalizado WhatsApp
 ## Validación
 
 Comprobar `node --check app.js` y `node --check property.js`; revisar en navegador móvil/escritorio, ampliar fotos, desplazarse para comprobar el botón fijo y verificar el destino de WhatsApp. El HTML/CSS no requieren build.
+
+## Diagnóstico del píxel
+
+Abrir la landing con `?diagnostico=1` para ver la carga de fbevents.js, disponibilidad del motor, clics detectados y recuento orientativo de recursos /tr. No genera eventos extra ni confirma recepción de Meta. El panel no se muestra en la URL normal. Si el motor carga pero Meta no recibe eventos, revisar en el Administrador de eventos los diagnósticos y permisos de tráfico del píxel para el dominio inmoabate-alt.github.io. No sustituir una lista de dominios existentes sin revisarla.

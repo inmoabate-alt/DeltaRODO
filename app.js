@@ -27,6 +27,7 @@ if (validPhone) {
     link.addEventListener('click', () => {
       // Mide clics; no confirma mensajes enviados ni clientes calificados.
       if (typeof window.fbq === 'function') window.fbq('trackCustom', 'WhatsAppClick', { content_ids: [property.reference], content_type: 'product' });
+      document.dispatchEvent(new Event('abate:whatsapp-click'));
     });
   });
   const phone = document.getElementById('phone');
@@ -101,3 +102,42 @@ viewer.addEventListener('keydown', event => {
   if (event.key === 'ArrowRight') { event.preventDefault(); showPhoto(activePhoto + 1); }
   if (event.key === 'ArrowLeft') { event.preventDefault(); showPhoto(activePhoto - 1); }
 });
+
+
+// Esta comprobación solo se muestra con ?diagnostico=1; no genera eventos extra.
+if (new URLSearchParams(window.location.search).get('diagnostico') === '1') {
+  const panel = document.createElement('section');
+  panel.className = 'pixel-diagnostics';
+  panel.setAttribute('aria-label', 'Comprobación de Meta');
+  panel.innerHTML = '<h2>Comprobación de Meta</h2><p>Versión: diagnóstico 1 · Píxel 1905629136345100</p><p id="pixel-library" role="status"></p><p id="pixel-engine"></p><p id="pixel-clicks">Clics en WhatsApp durante esta visita: 0.</p><p id="pixel-requests"></p><p>Estos datos comprueban el navegador. La recepción debe confirmarse en Meta.</p>';
+  document.body.prepend(panel);
+  let clicks = 0;
+  function renderPixelStatus() {
+    const state = window.__abatePixelLoad;
+    document.getElementById('pixel-library').textContent = state === 'loaded'
+      ? 'Biblioteca de Meta: descargada.'
+      : state === 'error'
+        ? 'Biblioteca de Meta: no pudo descargarse. Puede haber un bloqueo del navegador o de la red.'
+        : 'Biblioteca de Meta: esperando que termine la descarga.';
+    document.getElementById('pixel-engine').textContent = typeof window.fbq?.callMethod === 'function'
+      ? 'Motor del píxel: disponible. PageView se solicitó al abrir.'
+      : 'Motor del píxel: no disponible; los eventos pueden estar en espera.';
+    const requests = performance.getEntriesByType('resource').filter(entry => {
+      try {
+        const url = new URL(entry.name);
+        return (url.hostname === 'facebook.com' || url.hostname.endsWith('.facebook.com')) && /^\/tr\/?$/.test(url.pathname);
+      } catch { return false; }
+    }).length;
+    document.getElementById('pixel-requests').textContent = `Solicitudes al endpoint de eventos observadas por el navegador: ${requests}. Este recuento puede ser incompleto y no confirma recepción.`;
+  }
+  document.addEventListener('abate:pixel-status', renderPixelStatus);
+  document.addEventListener('abate:whatsapp-click', () => {
+    clicks += 1;
+    document.getElementById('pixel-clicks').textContent = `Clics en WhatsApp durante esta visita: ${clicks}. Se solicitó WhatsAppClick al píxel.`;
+    renderPixelStatus();
+    setTimeout(renderPixelStatus, 1500);
+  });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) renderPixelStatus(); });
+  renderPixelStatus();
+  setTimeout(renderPixelStatus, 8000);
+}
