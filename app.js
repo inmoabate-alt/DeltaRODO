@@ -26,7 +26,7 @@ if (validPhone) {
     link.rel = 'noopener';
     link.addEventListener('click', () => {
       // Mide clics; no confirma mensajes enviados ni clientes calificados.
-      if (typeof window.fbq === 'function') window.fbq('trackCustom', 'WhatsAppClick', { content_ids: [property.reference], content_type: 'product' });
+      if (typeof window.fbq === 'function') window.fbq('track', 'Contact', { content_ids: [property.reference], content_name: 'WhatsApp · Delta Rodó' });
       document.dispatchEvent(new Event('abate:whatsapp-click'));
     });
   });
@@ -133,7 +133,7 @@ if (new URLSearchParams(window.location.search).get('diagnostico') === '1') {
   document.addEventListener('abate:pixel-status', renderPixelStatus);
   document.addEventListener('abate:whatsapp-click', () => {
     clicks += 1;
-    document.getElementById('pixel-clicks').textContent = `Clics en WhatsApp durante esta visita: ${clicks}. Se solicitó WhatsAppClick al píxel.`;
+    document.getElementById('pixel-clicks').textContent = `Clics en WhatsApp durante esta visita: ${clicks}. Se solicitó Contact (Contactar) al píxel.`;
     renderPixelStatus();
     setTimeout(renderPixelStatus, 1500);
   });

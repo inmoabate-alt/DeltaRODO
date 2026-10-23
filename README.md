@@ -18,7 +18,7 @@ El logo original utiliza el enlace de Infocasas proporcionado por el usuario, co
 
 ## Meta
 
-Píxel 1905629136345100. Se registra PageView y un evento personalizado WhatsAppClick al pulsar el único botón fijo. El clic no confirma mensaje enviado ni lead calificado. Revisar estos eventos en Meta → Probar eventos tras publicar. Gestionar el consentimiento y la información de privacidad que correspondan antes de campañas.
+Píxel 1905629136345100. Se registra PageView y el evento estándar Contact (Contactar en Meta) al pulsar el único botón fijo. Contact sustituye al anterior WhatsAppClick; no se envían ambos por el mismo clic. El clic no confirma mensaje enviado ni lead calificado. Revisar estos eventos en Meta → Probar eventos tras publicar. Para la conversión de Delta Rodó, elegir Contactar y filtrar por URL que contiene inmoabate-alt.github.io/DeltaRODO, conservando así separados los contactos de otras webs que comparten el píxel. Gestionar el consentimiento y la información de privacidad que correspondan antes de campañas.
 
 ## Validación
 
