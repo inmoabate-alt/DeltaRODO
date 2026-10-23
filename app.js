@@ -1,11 +1,15 @@
 'use strict';
 const property = window.PROPERTY;
-// La marca tipográfica sirve de respaldo hasta incorporar el logo original.
+// Conservar una marca de respaldo si el proveedor del logo no responde.
 if (property.logo) {
   const brandImage = document.getElementById('brand-image');
   brandImage.addEventListener('load', () => {
     brandImage.hidden = false;
     document.querySelector('.brand-fallback').hidden = true;
+  });
+  brandImage.addEventListener('error', () => {
+    brandImage.hidden = true;
+    document.querySelector('.brand-fallback').hidden = false;
   });
   brandImage.src = property.logo;
 }

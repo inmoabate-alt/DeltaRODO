@@ -1,7 +1,7 @@
 // Completar con información verificada de la publicación antes de lanzar anuncios.
 window.PROPERTY = {
   reference: '6178866',
-  logo: '', // URL o ruta al logo original; vacío conserva la marca tipográfica de respaldo.
+  logo: 'https://cdn2.infocasas.com.uy/web/th.outside320x320.6410770f2d1f6_logoabate.jpg',
   title: '2 dormitorios en Cordón. Balcón al frente.',
   location: 'J. E. Rodó y Minas · Cordón Sur · Montevideo',
   operation: 'VENTA · DELTA RODÓ',

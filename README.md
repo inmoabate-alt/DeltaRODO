@@ -14,7 +14,7 @@ En el repositorio abrir Settings → Pages → Build and deployment → Source: 
 
 Editar `property.js` para actualizar fotos y datos. Las siete imágenes usan URLs proporcionadas por el usuario y necesitan acceso a static.tokkobroker.com. El entorno de desarrollo bloquea ese dominio; el usuario confirmó que las fotos y WhatsApp funcionan en la publicación anterior de Netlify.
 
-El logo original todavía no está disponible como archivo: se mantiene una marca tipográfica de respaldo sin enlace roto. Para incorporarlo, añadir el archivo y asignar su ruta a `logo` en `property.js`.
+El logo original utiliza el enlace de Infocasas proporcionado por el usuario, configurado en `logo` de `property.js`. Se muestra con ancho adaptable y altura automática para conservar las proporciones. Si el proveedor no responde, se muestra una marca tipográfica de respaldo. El entorno bloquea la descarga de Infocasas con HTTP 403; su carga real debe comprobarse en la web publicada.
 
 ## Meta
 
